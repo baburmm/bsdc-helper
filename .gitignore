@@ -1,0 +1,7 @@
+.env
+_local_files/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.claude/launch.json

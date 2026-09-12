@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BSDC Helper</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>BSDC Helper <span id="count"></span></h1>
+    <button class="ghost" id="logout">Sign out</button>
+  </header>
+
+  <div id="drop">
+    <strong>Drop files here, or click to choose</strong>
+    <small id="hint">Loading…</small>
+    <input type="file" id="picker" multiple hidden>
+    <div id="progress">
+      <div class="bar"><i></i></div>
+      <div class="label"></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:20px;padding:12px">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th class="num">Size</th>
+          <th class="num when">Uploaded</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="empty" hidden>No files yet.</div>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+<script src="/static/app.js"></script>
+</body>
+</html>

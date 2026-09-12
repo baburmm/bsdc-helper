@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign in · BSDC Helper</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="login-wrap">
+  <form class="panel login-card" id="form">
+    <h1>BSDC Helper</h1>
+    <p class="sub">Enter the admin password to continue.</p>
+    <input type="password" id="password" placeholder="Password" autocomplete="current-password" autofocus required>
+    <button type="submit" id="submit">Sign in</button>
+    <div class="err" id="err" role="alert"></div>
+  </form>
+</div>
+
+<script>
+const form = document.getElementById('form');
+const err = document.getElementById('err');
+const submit = document.getElementById('submit');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  err.textContent = '';
+  submit.disabled = true;
+  submit.textContent = 'Signing in…';
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: document.getElementById('password').value })
+    });
+    if (res.ok) {
+      location.href = '/';
+      return;
+    }
+    const data = await res.json().catch(() => ({}));
+    err.textContent = data.error || 'Sign in failed.';
+  } catch {
+    err.textContent = 'Network error. Try again.';
+  }
+  submit.disabled = false;
+  submit.textContent = 'Sign in';
+});
+</script>
+</body>
+</html>
